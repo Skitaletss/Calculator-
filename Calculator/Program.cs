@@ -29,7 +29,7 @@ namespace SimpleCalculator
 
                 double num2 = GetValidNumber("Enter second number:");
 
-                Console.WriteLine("Enter operation (+, -, *, /):");
+                Console.WriteLine("Enter operation (+, -, *, /, ^):");
                 string operation = Console.ReadLine();
 
                 double result = 0;
@@ -50,6 +50,9 @@ namespace SimpleCalculator
                             result = num1 / num2;
                         else
                             Console.WriteLine("Error: Division by zero!");
+                        break;
+                    case "^":
+                        result = Math.Pow(num1, num2);
                         break;
                 }
 
