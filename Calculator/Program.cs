@@ -46,27 +46,51 @@ namespace SimpleCalculator
                 string operation = Console.ReadLine();
 
                 double result = 0;
+                bool validOperation = true;
 
                 switch (operation)
                 {
                     case "+":
                         result = num1 + num2;
+                        validOperation = true;
                         break;
                     case "-":
                         result = num1 - num2;
+                        validOperation = true;
                         break;
                     case "*":
                         result = num1 * num2;
+                        validOperation = true;
                         break;
                     case "/":
                         if (num2 != 0)
+                        {
                             result = num1 / num2;
+                            validOperation = true;
+                        }
                         else
+                        {
                             Console.WriteLine("Error: Division by zero!");
+                            validOperation = false;
+                        }
                         break;
                     case "^":
                         result = Math.Pow(num1, num2);
+                        validOperation = true;
                         break;
+                    default:
+                        Console.WriteLine("Error: Invalid operation!");
+                        validOperation = false;
+                        break;
+                }
+
+                if (validOperation)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"Result: {result}");
+                    Console.ResetColor();
+
+                    LogOperation(num1, num2, operation, result);
                 }
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
