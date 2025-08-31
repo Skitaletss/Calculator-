@@ -17,7 +17,9 @@ namespace SimpleCalculator
         }
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("=== Simple Calculator ===");
+            Console.ResetColor();
 
             while (true)
             {
@@ -56,7 +58,9 @@ namespace SimpleCalculator
                         break;
                 }
 
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"Result: {result}");
+                Console.ResetColor();
             }
         }
 
