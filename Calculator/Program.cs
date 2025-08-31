@@ -66,7 +66,7 @@ namespace SimpleCalculator
 
                 double num2 = GetValidNumber("Enter second number:");
 
-                Console.WriteLine("Enter operation (+, -, *, /, ^):");
+                Console.WriteLine("Enter operation (+, -, *, /, ^, abs):");
                 string operation = Console.ReadLine();
 
                 double result = 0;
@@ -100,6 +100,10 @@ namespace SimpleCalculator
                         break;
                     case "^":
                         result = Math.Pow(num1, num2);
+                        validOperation = true;
+                        break;
+                    case "abs":
+                        result = Math.Abs(num1);
                         validOperation = true;
                         break;
                     default:
