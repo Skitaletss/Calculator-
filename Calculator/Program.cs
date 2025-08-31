@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace SimpleCalculator
 {
@@ -15,6 +16,16 @@ namespace SimpleCalculator
                 Console.WriteLine("Invalid input! Please enter a valid number.");
             }
         }
+
+        static void LogOperation(double num1, double num2, string operation, double result)
+        {
+            string logMessage = $"{DateTime.Now}: {num1} {operation} {num2} = {result}";
+            Console.WriteLine($"Log: {logMessage}");
+
+            // Записуємо в файл
+            File.AppendAllText("calculator_log.txt", logMessage + Environment.NewLine);
+        }
+
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -61,6 +72,7 @@ namespace SimpleCalculator
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"Result: {result}");
                 Console.ResetColor();
+                LogOperation(num1, num2, operation, result);
             }
         }
 
