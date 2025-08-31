@@ -4,6 +4,17 @@ namespace SimpleCalculator
 {
     class Program
     {
+        static double GetValidNumber(string prompt)
+        {
+            while (true)
+            {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                if (double.TryParse(input, out double number))
+                    return number;
+                Console.WriteLine("Invalid input! Please enter a valid number.");
+            }
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("=== Simple Calculator ===");
@@ -14,10 +25,9 @@ namespace SimpleCalculator
                 string input1 = Console.ReadLine();
                 if (input1.ToLower() == "exit") break;
 
-                double num1 = Convert.ToDouble(input1);
+                double num1 = GetValidNumber("Enter first number:");
 
-                Console.WriteLine("Enter second number:");
-                double num2 = Convert.ToDouble(Console.ReadLine());
+                double num2 = GetValidNumber("Enter second number:");
 
                 Console.WriteLine("Enter operation (+, -, *, /):");
                 string operation = Console.ReadLine();
