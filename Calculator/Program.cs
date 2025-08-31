@@ -34,9 +34,15 @@ namespace SimpleCalculator
 
             while (true)
             {
-                Console.WriteLine("\nEnter first number (or 'exit' to quit):");
+                Console.WriteLine("\nEnter first number (or 'exit' to quit, 'clear' to clear log):");
                 string input1 = Console.ReadLine();
                 if (input1.ToLower() == "exit") break;
+                if (input1.ToLower() == "clear")
+                {
+                    File.WriteAllText("calculator_log.txt", string.Empty);
+                    Console.WriteLine("Log cleared!");
+                    continue;
+                }
 
                 double num1 = GetValidNumber("Enter first number:");
 
