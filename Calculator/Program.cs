@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SimpleCalculator
 {
     class Program
     {
+        private static int totalOperations = 0;
+        private static Dictionary<string, int> operationCount = new Dictionary<string, int>();
+
         static double GetValidNumber(string prompt)
         {
             while (true)
@@ -19,10 +23,16 @@ namespace SimpleCalculator
 
         static void LogOperation(double num1, double num2, string operation, double result)
         {
+            totalOperations++;
+
+            if (operationCount.ContainsKey(operation))
+                operationCount[operation]++;
+            else
+                operationCount.Add(operation, 1);
+
             string logMessage = $"{DateTime.Now}: {num1} {operation} {num2} = {result}";
             Console.WriteLine($"Log: {logMessage}");
 
-            // Записуємо в файл
             File.AppendAllText("calculator_log.txt", logMessage + Environment.NewLine);
         }
 
@@ -36,7 +46,15 @@ namespace SimpleCalculator
             {
                 Console.WriteLine("\nEnter first number (or 'exit' to quit, 'clear' to clear log):");
                 string input1 = Console.ReadLine();
-                if (input1.ToLower() == "exit") break;
+                if (input1.ToLower() == "exit")
+                {
+                    Console.WriteLine($"\nTotal operations: {totalOperations}");
+                    foreach (var op in operationCount)
+                    {
+                        Console.WriteLine($"{op.Key}: {op.Value} times");
+                    }
+                    break;
+                }
                 if (input1.ToLower() == "clear")
                 {
                     File.WriteAllText("calculator_log.txt", string.Empty);
